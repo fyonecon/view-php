@@ -103,11 +103,18 @@ class view {
         echo '<div style="font-size: 18px;padding: 5px 10px;"><span style="color: red;" id="back-div">5</span><span>  秒后自动返回上一级</span>
             <script>
                 var num = 5;
-                setInterval(function() {
+                var si = 0;
+                si = setInterval(function() {
                     document.getElementById("back-div").innerHTML= num;
                     if (num===0){
                         history.go(-1);
                     } 
+                    
+                    if (num === -1){
+                         clearInterval(si);
+                         window.location.replace("./?");
+                    } 
+                    
                     num--;
                 }, 1000);
     
