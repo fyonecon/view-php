@@ -143,7 +143,7 @@ class view {
 
     public function div_notice($code, $txt){
 
-        $div = '<div style="position: fixed; width: 100%; height: 100%;background: rgba(0,0,0,0.6); top: 0; left: 0;z-index: 300; color: white;font-size: 16px; letter-spacing: 2px;"><div style="padding: 30px 20px;"><div style="padding-top: 10px;">状态码：'.$code.'</div><div style="padding-top: 10px;">问题解释：'.$txt.'</div></div></div>';
+        $div = '<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>访问出现问题</title><div style="position: fixed; width: 100%; height: 100%;background: rgba(0,0,0,0.7); top: 0; left: 0;z-index: 300; color: white;font-size: 15px; letter-spacing: 2px;"><div style="padding: 30px 20px;"><div style="padding-top: 10px;">状态码：'.$code.'</div><div style="padding-top: 10px;">问题解释：'.$txt.'</div></div></div>';
 
         return $div;
     }
