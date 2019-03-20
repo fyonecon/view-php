@@ -2,6 +2,8 @@
 将view框架用php重写一边，实现类似的配置和功能，原始view项目在https://github.com/fyonecon/view
 实现模块化、可维护、提高项目安全性等；
 
+`本框架只是处在view层面，快速渲染组装html。`
+
 ### 使用与配置：
 
 #### 1. 目录介绍：
