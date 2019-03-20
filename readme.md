@@ -1,6 +1,9 @@
-## view-php：view框架的php写法
+## view-php：view框架的php写法，v1.0
+将view框架用php重写一边，实现类似的配置和功能，原始view项目在https://github.com/fyonecon/view。
+实现模块化、可维护、提高项目安全性等；
 
-### 使用与配置
+### 使用与配置：
+
 #### 1. 目录介绍：
 - ---config  // 自定义配置文件夹
 - ------config.php // 公用文件配置
@@ -35,4 +38,7 @@ index.php入口（但不必显示入口文件名）——解析url参数——�
 #### 4. 静态文件缓存
 公用js、css默认缓存1000s，模块js、css默认缓存100s
 
-## view框架的js写法 请前往https://github.com/fyonecon/view 。类似的配置，类似解析，类似的构造
+### view框架的js写法：
+请前往https://github.com/fyonecon/view 。类似的配置，类似解析，类似的构造。
+
+### 第一次编写于 2019-03-20 13：44
