@@ -5,7 +5,7 @@
  * */
 
 namespace depend;
-require_once 'view.php';
+
 
 class depend extends view {
 
@@ -16,8 +16,16 @@ class depend extends view {
      * */
     public function get_route($url, $route_key, $default_route_value){
 
-        $route_value = $this->getThisUrlValue($url, $route_key);
+        // 屏蔽index.php访问
+        $array = parse_url($url);
+        $path = $array['path'];
+        if (strpos($path,'index.php') !== false || strpos($path,'index') !== false){
+            $this->back_404();
+            exit();
+        }
 
+        // 计算路由
+        $route_value = $this->getThisUrlValue($url, $route_key);
         if ($route_value == null){
             $route_value = $default_route_value;
         }else if ($route_value == 'none-key'){
