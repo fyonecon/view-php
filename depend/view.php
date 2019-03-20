@@ -57,7 +57,7 @@ class view {
      * */
     public function back_404(){
         $this->httpStatus(404);
-        echo '404-页面未发现';
+        echo $this->div_notice('404', '页面未发现');
         exit;
     }
 
@@ -66,7 +66,7 @@ class view {
      * */
     public function back_403(){
         $this->httpStatus(403);
-        echo '403-路由错误，拒绝访问';
+        echo $this->div_notice('403', '路由错误，拒绝访问');
         exit;
     }
 
@@ -141,6 +141,12 @@ class view {
         return $time;
     }
 
+    public function div_notice($code, $txt){
+
+        $div = '<div style="position: fixed; width: 100%; height: 100%;background: rgba(0,0,0,0.6); top: 0; left: 0;z-index: 300; color: white;font-size: 16px; letter-spacing: 2px;"><div style="padding: 30px 20px;"><div style="padding-top: 10px;">状态码：'.$code.'</div><div style="padding-top: 10px;">问题解释：'.$txt.'</div></div></div>';
+
+        return $div;
+    }
 
 
 }
