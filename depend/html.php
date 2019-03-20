@@ -14,7 +14,13 @@ include $_file_config;
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><?=isset($title)?$title:'view-php';?></title>
+    <link rel="icon" href="static/favicon.ico" type="image/x-icon">
+    <meta name="robots" content="noindex, nofollow"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="web前端框架view的php重写"/>
     <?php
     // 以下不需要修改
 
