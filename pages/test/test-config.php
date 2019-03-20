@@ -15,5 +15,3 @@ $route_file = [ // 页面模块js、css，放在该模块目录下
 ];
 
 test();
-
-echo $_GET['test'];
