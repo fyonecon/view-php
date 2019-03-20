@@ -2,7 +2,8 @@
 /*
  * 公共配置
  * */
-namespace common;
+namespace config;
+require_once 'config/common.php';   // 自定义的公共函数
 
 $config = [
 
@@ -23,15 +24,16 @@ $route = $config["route"];
 $route_url = $config['web_url'].$route.'=';
 $file_url = $config['file_url'];
 $file_time = $config['time'];
+$time_config = ceil(time()/100)*100; // 模块文件缓存100s
 
 $page_file = [ // 公共js、css
     'head_js'=> [
-        $file_url.'static/js/all.js?'.$file_time,
+        '/js/all.js',
     ],
     'head_css'=> [
-        $file_url.'static/css/all.css?'.$file_time,
+        '/css/all.css',
     ],
     'foot_js'=> [
-        $file_url.'static/js/foot.js?'.$file_time,
+        '/js/foot.js',
     ],
 ];

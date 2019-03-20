@@ -23,11 +23,11 @@ include $_file_config;
     $js = $page_file['head_js'];
 
     for ($c=0; $c<count($css); $c++){
-        echo '<link class="h-css h-css-'.$c.'" rel="stylesheet" href="'.$css[$c].'" />';
+        echo '<link class="h-css h-css-'.$c.'" rel="stylesheet" href="'.$file_url.'static/'.$css[$c].'?'.$file_time.'" />';
     }
 
     for ($j=0; $j<count($js); $j++){
-        echo '<script class="h-js h-js-'.$j.'" src="'.$js[$j].'"></script>';
+        echo '<script class="h-js h-js-'.$j.'" src="'.$file_url.'static/'.$js[$j].'?'.$file_time.'"></script>';
     }
 
     ?>
@@ -59,7 +59,7 @@ include $_file;
 
 $js = $page_file['foot_js'];
 for ($f=0; $f<count($js); $f++){
-    echo '<script class="f-js f-js-'.$f.'" src="'.$js[$f].'"></script>';
+    echo '<script class="f-js f-js-'.$f.'" src="'.$file_url.'static/'.$js[$f].'?'.$file_time.'"></script>';
 }
 
 if(isset($route_file)){
@@ -68,10 +68,10 @@ if(isset($route_file)){
     $js_string = '';
     $css_string = '';
     for ($r_c=0; $r_c<count($r_css); $r_c++){
-        $css_string .= '<link class="r-css r-css-'.$r_c.'" rel="stylesheet" href="'.$file_url.'pages/'.$page.'/'.$r_css[$r_c].'" />';
+        $css_string .= '<link class="r-css r-css-'.$r_c.'" rel="stylesheet" href="'.$file_url.'pages/'.$page.'/'.$r_css[$r_c].'?'.$time_config.'" />';
     }
     for ($r_j=0; $r_j<count($r_js); $r_j++){
-        $js_string .= '<script class="r-js r-js-'.$r_j.'" src="'.$file_url.'pages/'.$page.'/'.$r_js[$r_j].'"></script>';
+        $js_string .= '<script class="r-js r-js-'.$r_j.'" src="'.$file_url.'pages/'.$page.'/'.$r_js[$r_j].'?'.$time_config.'"></script>';
     }
     echo $css_string;
     echo $js_string;
