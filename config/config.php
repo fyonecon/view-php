@@ -22,6 +22,7 @@ $config = [
 ];
 
 $route = $config["route"];
+$route_default = $config['route_default'];
 $route_url = $config['web_url'].$route.'=';
 $file_url = $config['file_url'];
 $file_time = $config['time'];

@@ -11,71 +11,40 @@ class depend extends view {
 
     /*
      * 获取url参数，返回route参数
-     * index.php?route=home&p=1$limit=20
+     * 使用正则所匹配的范围更广，而且比$_GET安全
+     * xx/?route=home&p=1$limit=20
      * */
-    public function get_route($url, $_config, $_default){ // 没有使用$_GET是因为解析url更安全
-        $array = parse_url($url);
+    public function get_route($url, $route_key, $default_route_value){
 
-        $path = $array['path']; // 访问主路径
+        $route_value = $this->getThisUrlValue($url, $route_key);
 
-        // 拦截关键词“index.php”
-        $path_array = explode('.', $path);
-        if (isset($path_array[1]) && $path_array[1] == 'php'){
-            $this->back_404();
+        if ($route_value == null){
+            $route_value = $default_route_value;
+        }else if ($route_value == 'none-key'){
+            $this->back_403();
         }
 
-        if (array_key_exists('query', $array)){
-            $query = $array['query']; // 访问的参数，即?后面的参数
-        }else{ // 没有参数则到默认
-            $query = $_config.'='.$_default;
-        }
-
-        $query_array = explode('&', $query);
-
-        $new_array = [];
-        foreach ($query_array as $value){
-            $v = explode('=', $value);
-            if (isset($v[1])) {
-                $new_array[$v[0]] = $v[1];
-            }else {
-                $this->back_403();
-            }
-        }
-
-        if (array_key_exists($_config, $new_array)){
-            $route = $new_array[$_config];
-            if ($route == 404){
-                $this->back_404();
-            }else if ($route == ''){
-                $this->back_403();
-            }
-        }else{
-            $route = $_default;
-        }
-
-        return $route;
+        return $route_value;
     }
 
-
 }
-
-$dep = new depend();
+$depend = new depend();
 
 $url = $_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-$page = $dep->get_route($url, $config['route'], $config['route_default']); // page-name,route-value-name
+$page = $depend->get_route($url, isset($route)?$route:'', isset($route_default)?$route_default:''); // page-name,route-value-name
 
 $_file = 'pages/'.$page.'/'.$page.'.php';
 $_file_config = 'pages/'.$page.'/'.$page.'-config.php';
 
 if(!file_exists($_file)){
-    echo '模块文件404：缺失'.$page.'文件';
-    $dep->back_404();
+    echo '模块文件404：缺失模块'.$page.'文件';
+    $depend->back_404();
     exit();
 }
 
 if(!file_exists($_file_config)){
-    echo '模块配置文件404：缺失'.$page.'-config文件';
-    $dep->back_404();
+    echo '模块配置文件404：缺失模块'.$page.'-config文件';
+    $depend->back_404();
     exit();
 }
 

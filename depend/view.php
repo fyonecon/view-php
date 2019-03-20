@@ -7,6 +7,40 @@ namespace depend;
 
 class view {
 
+    /*
+     * php正则出url所有参数
+     * 支持 ?、$、#
+     * */
+    public function getUrlKeyValue($url){
+        $result = array();
+        $mr     = preg_match_all('/(\?|&|#)(.+?)=([^&?#]*)/i', $url, $matchs);
+        if ($mr !== false) {
+            for ($i = 0; $i < $mr; $i++) {
+                $result[$matchs[2][$i]] = $matchs[3][$i];
+            }
+        }
+        return $result;
+    }
+
+    /*
+     * 获取url键的参数
+     * */
+    public function getThisUrlValue($url, $key){
+        $array = $this->getUrlKeyValue($url);
+
+        if ($array){
+            if(isset($array[$key])){
+                $value = $array[$key];
+            }else{ // 有参数无键
+                $value = 'none-key';
+            }
+        }else{ // 无参数
+            $value = null;
+        }
+
+        return $value;
+    }
+
     public function httpStatus($num){//网页返回码
         static $http = array (
             100 => "HTTP/1.1 100 Continue",
