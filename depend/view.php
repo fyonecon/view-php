@@ -91,7 +91,7 @@ class view {
      * */
     public function back_404(){
         $this->httpStatus(404);
-        echo $this->div_notice('404', '页面未发现');
+        echo $this->div_notice('404', '页面未发现，可能是输入的网址有问题。');
         exit;
     }
 
@@ -109,15 +109,12 @@ class view {
                     if (num===0){
                         history.go(-1);
                     } 
-                    
                     if (num === -1){
                          clearInterval(si);
                          window.location.replace("./?");
                     } 
-                    
                     num--;
                 }, 1000);
-    
             </script></div>';
         echo $this->div_notice('403', '网址参数不完整，路由错误，拒绝继续访问');
         exit;
@@ -169,6 +166,29 @@ class view {
         }
         curl_close($curl);
         return $tmpInfo;
+    }
+
+    /*
+     * 获取服务器IP
+     * */
+    public function server_ip(){
+        return $_SERVER['SERVER_ADDR'];
+    }
+
+    /*
+     * 获取客户端IP
+     * */
+    public function user_ip(){
+        return $_SERVER['REMOTE_ADDR'];
+    }
+
+    /*
+     * 返回当前毫秒时间戳
+     * */
+    public function now_timestamp() {
+        list($ms, $sec) = explode(' ', microtime());
+        $time = (float)sprintf('%.0f', (floatval($ms) + floatval($sec)) * 1000);
+        return $time;
     }
 
     public function div_notice($code, $txt){
