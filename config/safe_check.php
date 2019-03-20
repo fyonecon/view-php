@@ -8,13 +8,31 @@ use depend\view;
 
 class safeCheck extends view {
 
-    public function login_state(){
+    public function ip_check(){
 
-        return "check";
+        $ip = $this->user_ip();
+
+        $black_ip = [
+            //'::1', // localhost
+            //'127.0.0.1',
+        ];
+
+        if(in_array($ip, $black_ip)){
+            return $this->back_404();
+        }else{
+            return $ip;
+        }
+
+    }
+
+
+    public function login_state(){
+        $ip = $this->ip_check();
+        return $ip;
     }
 
 }
 
-
 $check = new safeCheck();
 
+echo $check->login_state();
