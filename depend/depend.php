@@ -68,13 +68,13 @@ $_file = 'pages/'.$page.'/'.$page.'.php';
 $_file_config = 'pages/'.$page.'/'.$page.'-config.php';
 
 if(!file_exists($_file)){
-    echo '模块文件404：缺失'.$page.'.php文件';
+    echo '模块文件404：缺失'.$page.'文件';
     $dep->back_404();
     exit();
 }
 
 if(!file_exists($_file_config)){
-    echo '模块配置文件404：缺失'.$page.'-config.php文件';
+    echo '模块配置文件404：缺失'.$page.'-config文件';
     $dep->back_404();
     exit();
 }

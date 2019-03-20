@@ -12,7 +12,7 @@ require_once 'depend/depend.php';   // 计算路由，拦截请求
 
 require_once 'depend/html.php';     // 根据路由渲染页面
 
-// 访问路由固定写法/?route=xxx&test=xx
+// 访问路由固定写法xx/?route=xxx&test=aaa，注意url访问已经屏蔽了index.php?
 
 
 
