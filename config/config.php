@@ -13,6 +13,7 @@ $config = [
 
     'php_debug' => true,
     'time'=> ceil(time()/1000)*1000, // 默认缓存1000s
+    'time_config'=> ceil(time()/100)*100, // 模块文件缓存100s
     'page_time'=> time(),
 
     'route'=> 'route', // 页面路由名称
@@ -24,7 +25,7 @@ $route = $config["route"];
 $route_url = $config['web_url'].$route.'=';
 $file_url = $config['file_url'];
 $file_time = $config['time'];
-$time_config = ceil(time()/100)*100; // 模块文件缓存100s
+$time_config = $config['time_config'];
 
 $page_file = [ // 公共js、css
     'head_js'=> [
