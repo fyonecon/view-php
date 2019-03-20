@@ -13,7 +13,7 @@ class depend extends view {
      * 获取url参数，返回route参数
      * index.php?route=home&p=1$limit=20
      * */
-    public function get_route($url, $_config, $_default){
+    public function get_route($url, $_config, $_default){ // 没有使用$_GET是因为解析url更安全
         $array = parse_url($url);
 
         $path = $array['path']; // 访问主路径
@@ -35,9 +35,9 @@ class depend extends view {
         $new_array = [];
         foreach ($query_array as $value){
             $v = explode('=', $value);
-            if (isset($v[1]) && $v[1]) {
+            if (isset($v[1])) {
                 $new_array[$v[0]] = $v[1];
-            }else{
+            }else {
                 $this->back_403();
             }
         }
