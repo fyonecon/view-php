@@ -29,12 +29,12 @@ $time_config = $config['time_config'];
 
 $page_file = [ // 公共js、css
     'head_js'=> [
-        '/js/all.js',
+        'js/all.js',
     ],
     'head_css'=> [
-        '/css/all.css',
+        'css/all.css',
     ],
     'foot_js'=> [
-        '/js/foot.js',
+        'js/foot.js',
     ],
 ];
