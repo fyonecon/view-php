@@ -164,29 +164,6 @@ class view {
         return $tmpInfo;
     }
 
-    /*
-     * 获取服务器IP
-     * */
-    public function server_ip(){
-        return $_SERVER['SERVER_ADDR'];
-    }
-
-    /*
-     * 获取客户端IP
-     * */
-    public function user_ip(){
-        return $_SERVER['REMOTE_ADDR'];
-    }
-
-    /*
-     * 返回当前毫秒时间戳
-     * */
-    public function now_timestamp() {
-        list($ms, $sec) = explode(' ', microtime());
-        $time = (float)sprintf('%.0f', (floatval($ms) + floatval($sec)) * 1000);
-        return $time;
-    }
-
     public function div_notice($code, $txt){
 
         $div = '<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>访问出现问题</title><div style="position:fixed; width: 100%; height: 100%;background: rgba(0,0,0,0.5); top: 0; left: 0;z-index: 300; color: white;font-size: 15px; letter-spacing: 2px;"><div style="padding: 30px 20px;"><div style="padding-top: 10px;">状态码：'.$code.'</div><div style="padding-top: 10px;">问题解释：'.$txt.'</div></div></div>';

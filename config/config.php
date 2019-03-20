@@ -2,8 +2,6 @@
 /*
  * 公共配置
  * */
-namespace config;
-require_once 'config/common.php';   // 自定义的公共函数
 
 $config = [
 

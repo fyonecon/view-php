@@ -5,7 +5,7 @@
  * */
 
 namespace depend;
-
+require_once 'view.php';
 
 class depend extends view {
 

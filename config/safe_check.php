@@ -3,14 +3,18 @@
  * 安全校验
  * 1. 可以在此完成登录校验
  * */
-
+namespace config;
 use depend\view;
+
+// 自定义的公共函数，此公共函数推荐在模块安全检测及模块中使用
+// 而框架依赖的公共函数可以在任意地方使用
+require_once 'common.php';
 
 class safeCheck extends view {
 
     public function ip_check(){
 
-        $ip = $this->user_ip();
+        $ip = user_ip();
 
         $black_ip = [
             //'::1', // localhost
