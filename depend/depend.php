@@ -35,7 +35,11 @@ class depend extends view {
         $new_array = [];
         foreach ($query_array as $value){
             $v = explode('=', $value);
-            $new_array[$v[0]] = $v[1];
+            if (isset($v[1]) && $v[1]) {
+                $new_array[$v[0]] = $v[1];
+            }else{
+                $this->back_403();
+            }
         }
 
         if (array_key_exists($_config, $new_array)){

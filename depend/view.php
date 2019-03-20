@@ -66,7 +66,19 @@ class view {
      * */
     public function back_403(){
         $this->httpStatus(403);
-        echo $this->div_notice('403', '路由错误，拒绝访问');
+        echo '<div style="font-size: 18px;padding: 5px 10px;"><span style="color: red;" id="back-div">5</span><span>  秒后自动返回上一级</span>
+            <script>
+                var num = 5;
+                setInterval(function() {
+                    document.getElementById("back-div").innerHTML= num;
+                    if (num===0){
+                        history.go(-1);
+                    } 
+                    num--;
+                }, 1000);
+    
+            </script></div>';
+        echo $this->div_notice('403', '网址参数不完整，路由错误，拒绝继续访问');
         exit;
     }
 
@@ -143,9 +155,9 @@ class view {
 
     public function div_notice($code, $txt){
 
-        $div = '<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>访问出现问题</title><div style="position: fixed; width: 100%; height: 100%;background: rgba(0,0,0,0.7); top: 0; left: 0;z-index: 300; color: white;font-size: 15px; letter-spacing: 2px;"><div style="padding: 30px 20px;"><div style="padding-top: 10px;">状态码：'.$code.'</div><div style="padding-top: 10px;">问题解释：'.$txt.'</div></div></div>';
+        $div = '<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>访问出现问题</title><div style="position:fixed; width: 100%; height: 100%;background: rgba(0,0,0,0.5); top: 0; left: 0;z-index: 300; color: white;font-size: 15px; letter-spacing: 2px;"><div style="padding: 30px 20px;"><div style="padding-top: 10px;">状态码：'.$code.'</div><div style="padding-top: 10px;">问题解释：'.$txt.'</div></div></div>';
 
-        return $div;
+        exit($div);
     }
 
 
