@@ -26,7 +26,7 @@ $file_url = $config['file_url'];
 $file_time = $config['time'];
 $time_config = $config['time_config'];
 
-$page_file = [ // 公共js、css
+$page_file = [ // 公共js、css，主目录为static
     'head_js'=> [
         'js/all.js',
     ],

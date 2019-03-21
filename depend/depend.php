@@ -3,9 +3,7 @@
  * 解析路由
  * 拦截请求
  * */
-
 namespace depend;
-
 
 class depend extends view {
 
