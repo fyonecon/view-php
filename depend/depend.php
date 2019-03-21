@@ -7,10 +7,10 @@ namespace depend;
 
 $website = $_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"]; // 页面网址
 
-define('VIEW_VERSION', '1.0', false);               // view依赖的版本
-define('VIEW_GIT', 'github.com/fyonecon/view-php'); // 项目开源地址
-define('WEBSITE', $website, false);                 // 页面网址
-define('ROUTE_URL', $route_url, false);             // 路由主地址
+define('VIEW_VERSION', '1.0', false);                   // view依赖的版本
+define('VIEW_GIT', 'github.com/fyonecon/view-php');     // 项目开源地址
+define('WEBSITE', $website, false);                     // 页面网址
+define('ROUTE_URL', $route_url, false);                 // 路由主地址
 
 class depend extends view {
 

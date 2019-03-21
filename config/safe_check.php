@@ -1,7 +1,7 @@
 <?php
 /*
  * 安全校验
- * 1. 可以在此完成登录校验
+ * 服务于模块
  * */
 namespace config;
 use depend\view;
