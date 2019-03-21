@@ -2,7 +2,7 @@
 /*
  * 自定义的全局公共函数
  * */
-
+use depend\view;
 /*
  * 获取服务器IP
  * */
@@ -25,3 +25,47 @@ function now_timestamp() {
     $time = (float)sprintf('%.0f', (floatval($ms) + floatval($sec)) * 1000);
     return $time;
 }
+
+
+/*
+ * 加密route
+ * */
+function route_encode($route){
+    $view = new view();
+    return $view->string_encode($route);
+}
+
+/*
+ * 解密route
+ * */
+function route_decode($route){
+    $view = new view();
+    return $view->string_decode($route);
+}
+
+/*
+ * 解析url中的参数
+ * 根据键获取值
+ * */
+function getThisUrlParam($url, $key){
+    $view = new view();
+    return $view->getThisUrlValue($url, $key);
+}
+
+/*
+ * 404
+ * */
+function state_404($txt = '页面未找到。'){
+    $view = new view();
+    $view->back_404($txt);
+}
+
+/*
+ * 403
+ * */
+function state_403($txt = '地址不对，拒绝访问。'){
+    $view = new view();
+    $view->back_403($txt);
+}
+
+

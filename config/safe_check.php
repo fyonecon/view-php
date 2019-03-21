@@ -29,8 +29,8 @@ class safeCheck extends view {
 
     }
 
-
     public function login_state(){
+
         $ip = $this->ip_check();
         return $ip;
     }
@@ -38,5 +38,3 @@ class safeCheck extends view {
 }
 
 $check = new safeCheck();
-
-echo $check->login_state();

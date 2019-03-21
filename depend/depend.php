@@ -25,12 +25,12 @@ class depend extends view {
         // 计算路由
         $route_value = $this->getThisUrlValue($url, $route_key);
         if ($route_value == null){
-            $route_value = $default_route_value;
-        }else if ($route_value == 'none-key'){
+            $route_value = $this->string_encode($default_route_value);
+        }else if ($route_value == 'not-that-key'){
             $this->back_403();
         }
 
-        return $route_value;
+        return $this->string_decode($route_value);
     }
 
 }

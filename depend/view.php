@@ -7,8 +7,10 @@ namespace depend;
 
 class view {
 
-    protected $skey;
+    protected $s_key;
     public function __construct(){
+        // parent::__construct();
+        $this->s_key = md5($this->server_ip()); // 解密密钥
 
     }
 
@@ -36,10 +38,10 @@ class view {
         if ($array){
             if(isset($array[$key])){
                 $value = $array[$key];
-            }else{ // 有参数无键
-                $value = 'none-key';
+            }else{ // 无匹配键
+                $value = 'not-that-key';
             }
-        }else{ // 无参数
+        }else{ // 有匹配键但是无参数
             $value = null;
         }
 
@@ -94,16 +96,16 @@ class view {
     /*
      * 返回404状态
      * */
-    public function back_404(){
+    public function back_404($txt = '页面未发现，可能是输入的网址有问题。'){
         $this->httpStatus(404);
-        echo $this->div_notice('404', '页面未发现，可能是输入的网址有问题。');
+        echo $this->div_notice('404', $txt);
         exit;
     }
 
     /*
      * 返回403状态
      * */
-    public function back_403(){
+    public function back_403($txt = '网址参数不完整，路由错误，拒绝继续访问'){
         $this->httpStatus(403);
         echo '<div style="font-size: 18px;padding: 5px 10px;"><span style="color: red;" id="back-div">5</span><span>  秒后自动返回上一级</span>
             <script>
@@ -121,7 +123,7 @@ class view {
                     num--;
                 }, 1000);
             </script></div>';
-        echo $this->div_notice('403', '网址参数不完整，路由错误，拒绝继续访问');
+        echo $this->div_notice('403', $txt);
         exit;
     }
 
@@ -198,39 +200,42 @@ class view {
 
     public function div_notice($code, $txt){
 
-        $div = '<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>访问出现问题</title><div style="position:fixed; width: 100%; height: 100%;background: rgba(0,0,0,0.5); top: 0; left: 0;z-index: 300; color: white;font-size: 15px; letter-spacing: 2px;"><div style="padding: 30px 20px;"><div style="padding-top: 10px;">状态码：'.$code.'</div><div style="padding-top: 10px;">问题解释：'.$txt.'</div></div></div>';
+        $div = '<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>访问出现问题</title><div style="position:fixed; width: 100%; height: 100%;background: rgba(0,0,0,0.5); top: 0; left: 0;z-index: 300; color: white;font-size: 15px; letter-spacing: 2px;"><div style="padding: 30px 20px;"><div style="padding-top: 10px;">访问状态：'.$code.'</div><div style="padding-top: 10px;">问题描述：'.$txt.'</div></div></div>';
 
         exit($div);
     }
 
-    /**
-     * 简单对称加密算法之加密
-     * @param String $string 需要加密的字串
-     * @param String $skey 加密EKY
-     * @return String
-     */
-    function encode($string = '', $skey = 'wenzi') {
+    // 加密
+    public function encode($string = '', $skey = 'dog2019') {
         $strArr = str_split(base64_encode($string));
         $strCount = count($strArr);
-        foreach (str_split($skey) as $key => $value)
+        foreach (str_split($skey) as $key => $value){
             $key < $strCount && $strArr[$key].=$value;
-        return str_replace(array('=', '+', '/'), array('O0O0O', 'o000o', 'oo00o'), join('', $strArr));
+        }
+
+        return str_replace(array('=', '+', '/', '4'), array('I', 'I', 'I', 'I'), join('', $strArr));
     }
 
-    /**
-     * 简单对称加密算法之解密
-     * @param String $string 需要解密的字串
-     * @param String $skey 解密KEY
-     * @return String
-     */
-    function decode($string = '', $skey = 'wenzi') {
-        $strArr = str_split(str_replace(array('O0O0O', 'o000o', 'oo00o'), array('=', '+', '/'), $string), 2);
+    // 解密
+    public function decode($string = '', $skey = 'dog2019') {
+        $strArr = str_split(str_replace(array('I', 'I', 'I', 'I'), array('=', '+', '/', '4'), $string), 2);
         $strCount = count($strArr);
-        foreach (str_split($skey) as $key => $value)
-            $key <= $strCount && $strArr[$key][1] === $value && $strArr[$key] = $strArr[$key][0];
+        foreach (str_split($skey) as $key => $value){
+            $key <= $strCount && @$strArr[$key][1] === $value && @$strArr[$key] = @$strArr[$key][0];
+        }
+
         return base64_decode(join('', $strArr));
     }
 
+    public function string_encode($encode_string){
+        // 密钥加密密钥取决于服务器IP的md5
+        return $this->encode($encode_string, $this->s_key);
+    }
+
+    public function string_decode($decode_string){
+        // 密钥加密密钥取决于服务器IP的md5
+        return $this->decode($decode_string, $this->s_key);
+    }
 
 
 }
