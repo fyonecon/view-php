@@ -237,7 +237,6 @@ class view {
         return $this->decode($decode_string, $this->s_key);
     }
 
-
 }
 
 

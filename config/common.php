@@ -3,6 +3,8 @@
  * 自定义的全局公共函数
  * */
 use depend\view;
+
+
 /*
  * 获取服务器IP
  * */
@@ -26,7 +28,6 @@ function now_timestamp() {
     return $time;
 }
 
-
 /*
  * 加密route
  * */
@@ -41,6 +42,13 @@ function route_encode($route){
 function route_decode($route){
     $view = new view();
     return $view->string_decode($route);
+}
+
+/*
+ * 返回/?route=xxx，方便在页面中引用和管理
+ * */
+function route_string($route_string = ''){
+    return ROUTE_URL.route_encode($route_string);
 }
 
 /*

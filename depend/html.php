@@ -4,7 +4,7 @@
  * html主体文件
  * 整个文件不需要更改
  * */
-require_once 'config/safe_check.php';
+require_once VIEW_PATH.'config/safe_check.php';
 include $_file_config;
 
 ?>

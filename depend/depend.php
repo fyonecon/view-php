@@ -5,6 +5,13 @@
  * */
 namespace depend;
 
+$website = $_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"]; // 页面网址
+
+define('VIEW_VERSION', '1.0', false);               // view依赖的版本
+define('VIEW_GIT', 'github.com/fyonecon/view-php'); // 项目开源地址
+define('WEBSITE', $website, false);                 // 页面网址
+define('ROUTE_URL', $route_url, false);             // 路由主地址
+
 class depend extends view {
 
     /*
@@ -36,11 +43,11 @@ class depend extends view {
 }
 $depend = new depend();
 
-$url = $_SERVER['SERVER_NAME'].':'.$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-$page = $depend->get_route($url, isset($route)?$route:'', isset($route_default)?$route_default:''); // page-name,route-value-name
+// 解析路由
+$page = $depend->get_route($website, isset($route)?$route:'', isset($route_default)?$route_default:''); // page-name,route-value-name
 
-$_file = 'pages/'.$page.'/'.$page.'.php';
-$_file_config = 'pages/'.$page.'/'.$page.'-config.php';
+$_file = VIEW_PATH.'pages/'.$page.'/'.$page.'.php'; // 模块div文件
+$_file_config = VIEW_PATH.'pages/'.$page.'/'.$page.'-config.php'; // 模块配置文件
 
 if(!file_exists($_file)){
     echo '模块文件404：缺失模块'.$page.'文件';
@@ -49,9 +56,8 @@ if(!file_exists($_file)){
 }
 
 if(!file_exists($_file_config)){
-    echo '模块配置文件404：缺失模块'.$page.'-config文件';
+    echo '模块配置文件404：缺失模块配置'.$page.'-config文件';
     $depend->back_404();
     exit();
 }
-
 

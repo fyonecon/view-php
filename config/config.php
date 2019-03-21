@@ -3,6 +3,7 @@
  * 公共配置
  * */
 
+// 自定义，系统参数配置
 $config = [
 
     'api_url' => '', // api主地址
@@ -19,13 +20,7 @@ $config = [
 
 ];
 
-$route = $config["route"];
-$route_default = $config['route_default'];
-$route_url = $config['web_url'].$route.'=';
-$file_url = $config['file_url'];
-$file_time = $config['time'];
-$time_config = $config['time_config'];
-
+// 自定义，公用文件配置
 $page_file = [ // 公共js、css，主目录为static
     'head_js'=> [
         'js/all.js',
@@ -37,3 +32,13 @@ $page_file = [ // 公共js、css，主目录为static
         'js/foot.js',
     ],
 ];
+
+
+// 以下不要修改
+$route = $config["route"];
+$route_default = $config['route_default'];
+$route_url = $config['web_url'].$route.'=';
+$file_url = $config['file_url'];
+$file_time = $config['time'];
+$time_config = $config['time_config'];
+

@@ -6,7 +6,9 @@
     <br/>
     <a class="a" href="<?=$route_url?><?=route_encode('test')?>">test</a><br/>
 
-    <?=include 'pages/common/foot.php'?>
+    <?=route_string('test')?>
+
+    <?=include VIEW_PATH.'pages/common/foot.php'?>
 
 </div>
 

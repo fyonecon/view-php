@@ -8,7 +8,7 @@ use depend\view;
 
 // 自定义的公共函数，此公共函数推荐在模块安全检测及模块中使用
 // 而框架依赖的公共函数可以在任意地方使用
-require_once 'common.php';
+require_once VIEW_PATH.'config/common.php';
 
 class safeCheck extends view {
 
