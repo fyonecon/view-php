@@ -13,5 +13,3 @@ $route_file = [ // 页面模块js、css，放在该模块目录下
         'test.css',
     ],
 ];
-
-state_404();
