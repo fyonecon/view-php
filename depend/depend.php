@@ -30,7 +30,7 @@ class depend extends view {
             $this->back_403();
         }
 
-        return $this->string_decode($route_value);
+        return $this->string_decode($route_value); // 路由解密。模块访问路由是先加密的，否则会出现访问404。
     }
 
 }
