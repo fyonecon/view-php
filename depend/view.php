@@ -5,12 +5,12 @@
 
 namespace depend;
 
-class view {
+require VIEW_PATH.'depend/secret.php';
 
-    protected $s_key;
+class view extends secret{
+
     public function __construct(){
-        // parent::__construct();
-        $this->s_key = md5($this->server_ip()); // 解密密钥
+        parent::__construct();
 
     }
 
@@ -205,44 +205,18 @@ class view {
         exit($div);
     }
 
-    // 加密
-    public function encode($string = '', $skey = 'dog2019') {
-//        $strArr = str_split(base64_encode($string));
-//        $strCount = count($strArr);
-//        foreach (str_split($skey) as $key => $value){
-//            $key < $strCount && $strArr[$key].=$value;
-//        }
-//
-//        return str_replace(array('=', '+', '/', '4', 'n'), array('I', 'I', 'I', 'I', 'I'), join('', $strArr));
-
-        return $string; // 有bug，单个尾字母为b或者n将无法还原
-    }
-
-    // 解密
-    public function decode($string = '', $skey = 'dog2019') {
-//        $strArr = str_split(str_replace(array('I', 'I', 'I', 'I', 'I'), array('=', '+', '/', '4', 'n'), $string), 2);
-//        $strCount = count($strArr);
-//        foreach (str_split($skey) as $key => $value){
-//            $key <= $strCount && @$strArr[$key][1] === $value && @$strArr[$key] = @$strArr[$key][0];
-//        }
-//
-//        return base64_decode(join('', $strArr));
-
-        return $string; // 有bug，单个尾字母为b或者n将无法还原
-    }
 
     public function string_encode($encode_string){
+        $secret = new secret();
         // 密钥加密密钥取决于服务器IP的md5
-        return $this->encode($encode_string, $this->s_key);
+        return $secret->encode($encode_string);
     }
 
     public function string_decode($decode_string){
+        $secret = new secret();
         // 密钥加密密钥取决于服务器IP的md5
-        return $this->decode($decode_string, $this->s_key);
+        return $secret->decode($decode_string);
     }
 
 }
-
-
-
 
