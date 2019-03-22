@@ -207,24 +207,28 @@ class view {
 
     // 加密
     public function encode($string = '', $skey = 'dog2019') {
-        $strArr = str_split(base64_encode($string));
-        $strCount = count($strArr);
-        foreach (str_split($skey) as $key => $value){
-            $key < $strCount && $strArr[$key].=$value;
-        }
+//        $strArr = str_split(base64_encode($string));
+//        $strCount = count($strArr);
+//        foreach (str_split($skey) as $key => $value){
+//            $key < $strCount && $strArr[$key].=$value;
+//        }
+//
+//        return str_replace(array('=', '+', '/', '4', 'n'), array('I', 'I', 'I', 'I', 'I'), join('', $strArr));
 
-        return str_replace(array('=', '+', '/', '4'), array('I', 'I', 'I', 'I'), join('', $strArr));
+        return $string; // 有bug，单个尾字母为b或者n将无法还原
     }
 
     // 解密
     public function decode($string = '', $skey = 'dog2019') {
-        $strArr = str_split(str_replace(array('I', 'I', 'I', 'I'), array('=', '+', '/', '4'), $string), 2);
-        $strCount = count($strArr);
-        foreach (str_split($skey) as $key => $value){
-            $key <= $strCount && @$strArr[$key][1] === $value && @$strArr[$key] = @$strArr[$key][0];
-        }
+//        $strArr = str_split(str_replace(array('I', 'I', 'I', 'I', 'I'), array('=', '+', '/', '4', 'n'), $string), 2);
+//        $strCount = count($strArr);
+//        foreach (str_split($skey) as $key => $value){
+//            $key <= $strCount && @$strArr[$key][1] === $value && @$strArr[$key] = @$strArr[$key][0];
+//        }
+//
+//        return base64_decode(join('', $strArr));
 
-        return base64_decode(join('', $strArr));
+        return $string; // 有bug，单个尾字母为b或者n将无法还原
     }
 
     public function string_encode($encode_string){
