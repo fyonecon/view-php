@@ -1,7 +1,5 @@
 <?php
 
-namespace depend;
-
 class secret {
 
     private $secret_key = 'view2019'; // 密钥：字母、数字、中文等任意内容
@@ -29,7 +27,7 @@ class secret {
             $this->secret_key = ceil(time()/100000)*100000;
         }
         $this->secret_key = md5($this->secret_key).sha1($this->secret_key).md5($this->salt).sha1($this->salt); // len 144
-
+        echo $this->secret_key.'<br/>';
     }
 
     public function en_mix($str){
@@ -168,4 +166,17 @@ class secret {
     }
 
 }
+
+
+
+// 测试算法
+$secret = new secret();
+
+$res1 = $secret->en_mix('aaaaabbbbb');
+echo "加密：".$res1;
+
+echo '<hr/>';
+
+$res2 = $secret->de_mix($res1);
+echo "解密：".$res2;
 
