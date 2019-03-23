@@ -24,7 +24,7 @@ class depend extends view {
         // 屏蔽index.php访问
         $array = parse_url($url);
         $path = $array['path'];
-        if (strpos($path,'index.php') !== false || strpos($path,'index') !== false){
+        if (strpos($path,'index.php') !== false){
             $this->back_404();
             exit();
         }
