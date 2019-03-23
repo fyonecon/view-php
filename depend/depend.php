@@ -12,7 +12,7 @@ define('VIEW_GIT', 'github.com/fyonecon/view-php');     // 项目开源地址
 define('WEBSITE', $website, false);                     // 页面网址
 define('ROUTE_URL', $route_url, false);                 // 路由主地址
 
-class depend extends view {
+final class depend extends view {
 
     /*
      * 获取url参数，返回route参数

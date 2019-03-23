@@ -10,7 +10,7 @@ use depend\view;
 // 而框架依赖的公共函数可以在任意地方使用
 require_once VIEW_PATH.'config/common.php';
 
-class safeCheck extends view {
+final class safeCheck extends view {
 
     public function ip_check(){
 
