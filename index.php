@@ -6,7 +6,7 @@
  * 3. url访问隐藏实际文件
  * */
 
-// 访问路由固定写法xx/?route=xxx&test=aaa，注意url访问已经屏蔽了index.php?和index?
+// 访问路由固定写法xx/?route=xxx&test=aaa，注意url访问已经屏蔽了index.php?
 
 define('VIEW_PATH', dirname(__FILE__).'/', false); // 项目的绝对路径，对大小写敏感
 
