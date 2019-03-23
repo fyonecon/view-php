@@ -6,11 +6,19 @@
 namespace depend;
 
 require VIEW_PATH.'depend/secret.php';
+require VIEW_PATH.'config/config.php';
+
+$log;
 
 class view extends secret{
 
+    protected $_log;
+
     public function __construct(){
-        // parent::__construct();
+        parent::__construct();
+
+        global $log;
+        $this->_log = $log;
 
     }
 
@@ -276,5 +284,17 @@ class view extends secret{
             }
         }
     }
+
+
+    public function write_log($log_txt, $php_line = 'unset', $log_name = 'log'){
+        if ($this->_log == true){
+            $file_name = VIEW_PATH.'log/'.date('Y-m-d').'-'.$log_name.'.txt';
+            file_put_contents($file_name, date('【Y-m-d H:i:s - '.$php_line.'】').$log_txt.PHP_EOL, FILE_APPEND); // 换行、追加
+        }
+    }
+
+
+
+
 }
 

@@ -28,7 +28,18 @@ final class depend extends view {
         $array = parse_url($url);
         $path = $array['path'];
         if (strpos($path,'index.php') !== false){
+            $txt = '已经屏蔽了 index.php 访问路由。';
+            $this->write_log($txt, __LINE__);
             $this->back_404();
+        }
+
+        // 判断日志文件夹的文件是否可写
+        $file_chmod = VIEW_PATH.'log/index.html';
+        if (!file_exists($file_chmod)){
+            if (!is_writable($file_chmod)){
+                $txt = VIEW_PATH.'log/ 文件夹权限可能不是777，view已经停止运行。';
+                $this->back_404($txt);
+            }
         }
 
         // 计算路由
@@ -47,7 +58,9 @@ final class depend extends view {
         if (SPIDER == true){
             $robot = $this->is_robot();
             if ($robot[0] == 1){
-                return $this->back_403('系统开启了拒绝Spider访问。');
+                $txt = '系统开启了拒绝Spider访问。';
+                $this->write_log($txt, __LINE__);
+                return $this->back_403($txt);
             }
         }
 
@@ -56,7 +69,9 @@ final class depend extends view {
             $version_array = explode('.',  phpversion());
             $version_string = $version_array[0]*10+$version_array[1];
             if ($version_string < 71){
-                return $this->back_403('系统要求PHP最低版本为7.1.x。');
+                $txt = '系统要求PHP最低版本为7.1.x。';
+                $this->write_log($txt, __LINE__);
+                return $this->back_403($txt);
             }
         }
 
@@ -80,13 +95,17 @@ $_file = VIEW_PATH.'pages/'.$page.'/'.$page.'.php'; // 模块div文件
 $_file_config = VIEW_PATH.'pages/'.$page.'/'.$page.'-config.php'; // 模块配置文件
 
 if(!file_exists($_file)){
-    echo '模块文件404：缺失模块'.$page.'文件';
+    $txt = '模块文件404：缺失模块'.$page.'文件';
+    echo $txt;
+    $depend->write_log($txt, __LINE__);
     $depend->back_404();
     exit();
 }
 
 if(!file_exists($_file_config)){
-    echo '模块配置文件404：缺失模块配置'.$page.'-config文件';
+    $txt = '模块配置文件404：缺失模块配置'.$page.'-config文件';
+    echo $txt;
+    $depend->write_log($txt, __LINE__);
     $depend->back_404();
     exit();
 }

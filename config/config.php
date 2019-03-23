@@ -21,6 +21,7 @@ $config = [
     'robot'=> true,             // 是否屏蔽搜索引擎爬虫
     'old_php'=> true,           // PHP低版本从7.1.x开始
     'route_encode'=> false ,    // 是否开启路由加密
+    'log'=> true,               // 是否开启系统日志
 
 ];
 
@@ -48,4 +49,5 @@ $time_config = $config['time_config'];
 $robot_spider = $config['robot'];
 $old_php = $config['old_php'];
 $route_encode = $config['route_encode'];
+$log = $config['log'];
 
