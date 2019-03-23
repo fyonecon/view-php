@@ -24,6 +24,16 @@ final class depend extends view {
      * */
     public function get_route($url, $route_key, $default_route_value){
 
+        // 判断日志文件夹的文件是否可写
+        $file_chmod = VIEW_PATH.'log/index.html';
+        if (!file_exists($file_chmod)){
+            if (!is_writable($file_chmod)){
+                $txt = VIEW_PATH.'log/ 文件夹权限可能不是777，view已经停止运行。';
+                $this->back_404($txt);
+                exit();
+            }
+        }
+
         // 屏蔽index.php访问
         $array = parse_url($url);
         $path = $array['path'];
@@ -31,15 +41,6 @@ final class depend extends view {
             $txt = '已经屏蔽了 index.php 访问路由。';
             $this->write_log($txt, __LINE__);
             $this->back_404();
-        }
-
-        // 判断日志文件夹的文件是否可写
-        $file_chmod = VIEW_PATH.'log/index.html';
-        if (!file_exists($file_chmod)){
-            if (!is_writable($file_chmod)){
-                $txt = VIEW_PATH.'log/ 文件夹权限可能不是777，view已经停止运行。';
-                $this->back_404($txt);
-            }
         }
 
         // 计算路由
