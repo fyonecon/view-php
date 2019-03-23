@@ -93,4 +93,46 @@ function state_403($txt = '地址不对，拒绝访问。'){
     $view->back_403($txt);
 }
 
+// 两个键值相等时的去重
+// 专用于数据库查出来的数组
+function group_arrays($info, $key1, $key2){
 
+    $have = [];
+    $array = [];
+    $index = [];
+
+    for($m=0; $m<count($info); $m++){
+        $has1 = $info[$m][$key1];
+        $has2 = $info[$m][$key2];
+
+        if (in_array([$has1=>$has2], $array)){
+            // 存在则跳过
+        }else{
+            $array[] = [$has1=>$has2];
+            $index[] = $m;
+        }
+    }
+
+    foreach ($index as $value){
+        $have[] = $info[$value];
+    }
+
+    return $have;
+}
+
+// 一个键值相等时的去重
+function group_array($info, $db_key){
+
+    $have = [];
+    $array = [];
+    for($m=0; $m<count($info); $m++){
+        $has_id = $info[$m][$db_key];
+        $array[] = $has_id;
+    }
+    $array = array_unique($array); // 返回 索引键=>id
+    foreach ($array as $key=>$value){
+        $have[] = $info[$key];
+    }
+
+    return $have;
+}
