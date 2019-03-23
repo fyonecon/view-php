@@ -56,7 +56,8 @@ class view extends secret{
         return $value;
     }
 
-    public function httpStatus($num){//网页返回码
+    // 网页返回码和返回状态
+    public function httpStatus($num){
         static $http = array (
             100 => "HTTP/1.1 100 Continue",
             101 => "HTTP/1.1 101 Switching Protocols",
@@ -206,6 +207,7 @@ class view extends secret{
         return $time;
     }
 
+    // 消息通知
     public function div_notice($code, $txt){
 
         $div = '<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>访问出现问题</title><div style="position:fixed; width: 100%; height: 100%;background: rgba(0,0,0,0.5); top: 0; left: 0;z-index: 300; color: white;font-size: 15px; letter-spacing: 2px;"><div style="padding: 30px 20px;"><div style="padding-top: 10px;">访问状态：'.$code.'</div><div style="padding-top: 10px;">问题描述：'.$txt.'</div></div></div>';
@@ -213,19 +215,21 @@ class view extends secret{
         exit($div);
     }
 
-
+    // 字符串加密
     public function string_encode($encode_string){
         $secret = new secret();
         // 密钥加密密钥取决于服务器IP的md5
         return $secret->encode($encode_string);
     }
 
+    // 字符串解密
     public function string_decode($decode_string){
         $secret = new secret();
         // 密钥加密密钥取决于服务器IP的md5
         return $secret->decode($decode_string);
     }
 
+    // 是否是搜索引擎爬虫
     public function is_robot(){
         $agent = strtolower(isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '');
         if (!empty($agent)) {
@@ -285,7 +289,7 @@ class view extends secret{
         }
     }
 
-
+    // 记录日志
     public function write_log($log_txt, $php_line = 'unset', $log_name = 'log'){
         if ($this->_log == true){
             $file_name = VIEW_PATH.'log/'.date('Y-m-d').'-'.$log_name.'.txt';
