@@ -5,6 +5,8 @@
  * */
 use depend\view;
 
+require VIEW_PATH.'config/config.php';
+$_route_encode = $route_encode;
 
 /*
  * 获取服务器IP
@@ -33,16 +35,30 @@ function now_timestamp() {
  * 加密route
  * */
 function route_encode($route){
-    $view = new view();
-    return $view->string_encode($route);
+    global $_route_encode;
+
+   if ($_route_encode == true){
+       $view = new view();
+       return $view->string_encode($route);
+   }else{
+       return $route;
+   }
+
 }
 
 /*
  * 解密route
  * */
 function route_decode($route){
-    $view = new view();
-    return $view->string_decode($route);
+    global $_route_encode;
+
+    if ($_route_encode == true){
+        $view = new view();
+        return $view->string_decode($route);
+    }else{
+        return $route;
+    }
+
 }
 
 /*

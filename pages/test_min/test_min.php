@@ -1,7 +1,7 @@
 <!--模块div-->
 <div class="test-min">
     test-min
-    <a class="a" href="<?=$route_url?><?=route_encode('home')?>">
+    <a class="a" href="<?=route_string('home')?>">
         home路由加密后访问：<?=route_string('home')?>
     </a>
 

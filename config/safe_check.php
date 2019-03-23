@@ -12,6 +12,12 @@ require_once VIEW_PATH.'config/common.php';
 
 final class safeCheck extends view {
 
+    public function __construct(){
+        parent::__construct();
+
+
+    }
+
     public function ip_check(){
 
         $ip = user_ip();

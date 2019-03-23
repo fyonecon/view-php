@@ -4,7 +4,7 @@
 
     home
     <br/>
-    <a class="a" href="<?=$route_url?><?=route_encode('test')?>">
+    <a class="a" href="<?=route_string('test')?>">
         test路由加密后访问：<?=route_string('test')?>
     </a>
     <br/>
