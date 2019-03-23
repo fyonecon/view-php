@@ -4,29 +4,46 @@ namespace depend;
 
 class secret {
 
-    private $secret_key = 'view2019'; // 密钥：字母、数字、中文等任意内容
-    private $salt = 19; // 容错度：数字范围[0, 63]
+    /*
+     * php对称加密算法，根据字母对照表
+     * 因为最终加密的字符串长度会x2，因此，加密场景适合加密字符串不是特别巨大的地方。
+     * 代码一共有三处自定义地方，根据注释更改自定义内容。
+     * 现有加密破解差不多需要万亿次。
+     * 2019-03-23
+     * github.com/fyonecon
+     *
+     * 加密内容格式：字母、数字、中文等任意内容，并支持部分特殊符号
+     * 加密：new secret()->encode('');
+     * 解密：new secret()->decode('');
+     *
+     * */
+
+    private $secret_key = 'view2019'; // 自定义。 密钥：字母、数字、中文等任意内容
+    private $salt = 19; // 自定义。 容错度：数字范围[0, 63]
     private $s = 1; // 不要更改
 
-    protected $_replace = [ // 建议使用不一样的[0]对应[1]，密钥对照表
-        ['=', 'ao1c'], // 必须
-        ['/', 'gen1'], // 必须
-        ['+', 'hba1'], // 必须
-        ['3', 'gen2'],
-        ['7', '6lon'],
-        ['8', 'o6oi'],
-        ['9', 'huw4'],
-        ['L', 'aiih'],
-        ['M', 'lmvk'],
-        ['W', 'l0ig'],
-        ['z', 'a2lj'],
-        ['y', 'a4bs'],
-        ['d', 'e1fg'],
+    protected $_replace = [ // 自定义。 建议使用不一样的[0]对应[1]，密钥对照表
+        // 35789       => 01246
+        // dpqyzxrtA-Z => abcefghjklmnowsijuv
+        ['=', 'aio1c'], // 必须
+        ['/', 'gjen1'], // 必须
+        ['+', 'hbua1'], // 必须
+        ['3', 'gven2'],
+        ['7', '61lon'],
+        ['8', 'o60oi'],
+        ['9', 'huws4'],
+        ['L', 'aiihn'],
+        ['M', 'lmvsk'],
+        ['W', 'l0ieg'],
+        ['z', 'a2lfj'],
+        ['y', 'a4cbs'],
+        ['d', 'e1ifg'],
+        ['p', 'jaio0'],
     ];
 
     public function __construct(){
         if (empty($this->secret_key)){
-            $this->secret_key = ceil(time()/100000)*100000;
+            $this->secret_key = ceil(time()/100000)*100000; // 如果没有定义密钥则使用为期一天的可变密钥
         }
         $this->secret_key = md5($this->secret_key).sha1($this->secret_key).md5($this->salt).sha1($this->salt); // len 144
 
@@ -107,7 +124,7 @@ class secret {
     }
 
     public function make_key_value(){ // 生成一位加密对照表
-        $string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'; // 不需要修改内容，但是可以修改字符数字的顺序
+        $string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'; //自定义。 不需要修改内容，但是可以修改字符数字的顺序
         $new_string = $string.$string;
         $salt = $this->salt;
 
