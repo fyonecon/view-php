@@ -1,3 +1,6 @@
+## 缺陷提示
+某些种类服务器下容易出现GET状态pending，目前发现在wamp最新版中。
+
 ## view-php：view框架的php写法，v1.0
 将view框架用php重写一边，实现类似的配置和功能，原始view项目在https://github.com/fyonecon/view
 实现模块化开发，可维护可扩展，并提高项目安全性等；
